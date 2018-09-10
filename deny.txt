@@ -1,0 +1,6 @@
+microsoft
+google
+amazon
+wikipedia
+freelancer
+
