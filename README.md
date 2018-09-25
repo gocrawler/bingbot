@@ -35,3 +35,9 @@ And this bot has a live http server for getting the sites from browser!
 ### Feel free to report any issue or hit the star!
 
 > For any suggestion AnikHasibul@outlook.com
+
+### TODO
+
+	*  Json Output
+	*  Colored Output
+	*  Smart web interface
