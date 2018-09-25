@@ -27,7 +27,7 @@ And this bot has a live http server for getting the sites from browser!
 
 > For exiting the bot you have to kill it or press `CTRL+C` or visit **`http://localhost:1338/exit`**
 
-> For realoading or rescaning `voot` files without exiting server visit **`http://localhost:1338/reload`**
+> For realoading or rescaning `dorks.txt` & `deny.txt` files without exiting server visit **`http://localhost:1338/reload`**
 
 > For getting only domain name visit **`http://localhost:1338/domain`**
 
@@ -38,6 +38,6 @@ And this bot has a live http server for getting the sites from browser!
 
 ### TODO
 
-	*  Json Output
-	*  Colored Output
-	*  Smart web interface
+*  Json Output
+*  Colored Output
+*  Smart web interface
