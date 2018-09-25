@@ -1,6 +1,6 @@
 # BingBot
-[![Report Card](https://goreportcard.com/badge/github.com/AnikHasibul/BingBot)](https://goreportcard.com/report/github.com/AnikHasibul/BingBot#license)
-[![Build Status](https://travis-ci.org/AnikHasibul/BingBot.svg?branch=master)](https://travis-ci.org/AnikHasibul/BingBot)
+[![Report Card](https://goreportcard.com/badge/github.com/AnikHasibul/bingbot)](https://goreportcard.com/report/github.com/AnikHasibul/BingBot#license)
+[![Build Status](https://travis-ci.org/AnikHasibul/bingbot.svg?branch=master)](https://travis-ci.org/AnikHasibul/BingBot)
 
 >A simple multi threaded bing search client for site collection.
 
