@@ -249,13 +249,7 @@ func Host(w http.ResponseWriter, _ *http.Request) {
 		log.Println(err)
 	}
 	if JSON {
-		OutputWithJSON(w,
-			filepath.Join(
-				dir,
-				"hosts.txt",
-			),
-		)
-		return
+		OutputWithJSON(w, s)
 	}
 	fmt.Fprintf(
 		w,
