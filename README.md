@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/AnikHasibul/bingbot.svg?branch=master)](https://travis-ci.org/AnikHasibul/BingBot)
 
 >A simple multi threaded bing search client for site collection.
-
-** SAVE YOUR DORKS AT `dorks.txt`**
+**NEW**: Now supports json output in `/` and `/domain` endpoint!
+**DONT_FORGET**: Save Your Dorks/Queries in `dorks.txt`
 
 ```txt
 site:in php?id=
@@ -38,6 +38,7 @@ And this bot has a live http server for getting the sites from browser!
 
 ### TODO
 
-*  Json Output
+*  <del>Json Output</del>
+*  Full Json Output With Title And Summary
 *  Colored Output
 *  Smart web interface
