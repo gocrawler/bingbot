@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/AnikHasibul/bingbot.svg?branch=master)](https://travis-ci.org/AnikHasibul/BingBot)
 
 >A simple multi threaded bing search client for site collection.
+
 **NEW**: Now supports json output in `/` and `/domain` endpoint!
 **DONT_FORGET**: Save Your Dorks/Queries in `dorks.txt`
 
