@@ -4,7 +4,7 @@
 
 >A simple multi threaded bing search client for site collection.
 **NEW**: Now supports json output in `/` and `/domain` endpoint!
-**Save Your Dorks/Queries in `dorks.txt`**
+**DONT_FORGET**: Save Your Dorks/Queries in `dorks.txt`
 
 ```txt
 site:in php?id=
