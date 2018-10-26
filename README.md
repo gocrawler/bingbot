@@ -39,5 +39,6 @@ And this bot has a live http server for getting the sites from browser!
 ### TODO
 
 *  <del>Json Output</del>
+*  Full Json Output With Title And Summary
 *  Colored Output
 *  Smart web interface
