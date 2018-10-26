@@ -94,9 +94,9 @@ func main() {
 	load()
 	// Server and handler functions
 	http.HandleFunc("/", live)
-	http.HandleFunc("/exit", Exit)
-	http.HandleFunc("/reload", Reload)
-	http.HandleFunc("/domain", Host)
+	http.HandleFunc("/exit", exitHandler)
+	http.HandleFunc("/reload", reloadHandler)
+	http.HandleFunc("/domain", domainHandler)
 	erb := http.ListenAndServe(":1338", nil)
 	if erb != nil {
 		fmt.Println("Got an error on http serving!\n", erb, "\nBut I am working for 10 second...")
@@ -216,10 +216,10 @@ func live(w http.ResponseWriter, _ *http.Request) {
 	}
 }
 
-// Reload reloads the Dorks and Deny loader
+// reloadHandler reloads the Dorks and Deny loader
 // without exiting the bot
 /* HTTP handler for reload */
-func Reload(w http.ResponseWriter, _ *http.Request) {
+func reloadHandler(w http.ResponseWriter, _ *http.Request) {
 
 	fmt.Fprintln(w, "Realoaded! Check your terminal output!")
 	fmt.Println("====================")
@@ -227,9 +227,9 @@ func Reload(w http.ResponseWriter, _ *http.Request) {
 	fmt.Println("====================")
 }
 
-// Host saves only the domain name of collected site
+// domainHandler saves only the domain name of collected site
 /* HTTP handler for /domain */
-func Host(w http.ResponseWriter, _ *http.Request) {
+func domainHandler(w http.ResponseWriter, _ *http.Request) {
 	var s []string
 	for i := range Results {
 		v, _ := url.ParseRequestURI(Results[i])
@@ -258,9 +258,9 @@ func Host(w http.ResponseWriter, _ *http.Request) {
 	)
 }
 
-// Exit exits the bot via web
+// exitHandler exits the bot via web
 /* HTTP handler for /exit */
-func Exit(w http.ResponseWriter, _ *http.Request) {
+func exitHandler(w http.ResponseWriter, _ *http.Request) {
 	fmt.Fprintln(w, "Exited!")
 	time.Sleep(1 * time.Second)
 	os.Exit(0)
