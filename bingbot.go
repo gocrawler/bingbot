@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"html/template"
@@ -22,6 +23,7 @@ var (
 	DorkFile        string
 	DenyFile        string
 	Concurrency     bool
+	JSON            bool
 	dir             = "."
 	TotalOutputFile = "All.txt"
 )
@@ -39,6 +41,7 @@ func init() {
 	flag.StringVar(&DorkFile, "dork", "dorks.txt", "Path of your dork file!")
 	flag.StringVar(&DenyFile, "deny", "deny.txt", "Path of your deny file!")
 	flag.BoolVar(&Concurrency, "turbo", true, "Concurrectly searches dorks. Turn it off (-turbo=false) if you have a lot of dorks and time.")
+	flag.BoolVar(&JSON, "json", false, "json output in every api endpoint")
 	flag.Parse()
 }
 
@@ -142,8 +145,9 @@ func Botify(searchStr string) {
 		if RespErr != nil {
 			fmt.Println("Error: ", RespErr)
 		}
-		defer resp.Body.Close()
 		body, BodyErr := ioutil.ReadAll(resp.Body)
+		// we don't need resp.Body anymore
+		resp.Body.Close()
 		if BodyErr != nil {
 			fmt.Println("Error: ", BodyErr)
 		}
@@ -181,13 +185,15 @@ func Botify(searchStr string) {
 			sey = append(sey, "http"+ExtractedHref[0])
 			total++
 		}
-		resp.Body.Close()
-
 	}
 }
 
 /* HTTP handler for  / or the root handler */
 func live(w http.ResponseWriter, _ *http.Request) {
+	if JSON {
+		OutputWithJSON(w, Results)
+		return
+	}
 	ser := gen{
 		PageTitle: fmt.Sprintf("BingBot :: By Anik Hasibul [ %d Site Collected]", total),
 		Links:     Results,
@@ -242,14 +248,26 @@ func Host(w http.ResponseWriter, _ *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Fprintf(w, "Done![%s]", filepath.Join(dir, "hosts.txt"))
+	if JSON {
+		OutputWithJSON(w,
+			filepath.Join(
+				dir,
+				"hosts.txt",
+			),
+		)
+		return
+	}
+	fmt.Fprintf(
+		w,
+		"Done![%s]",
+		filepath.Join(dir, "hosts.txt"),
+	)
 }
 
 // Exit exits the bot via web
 /* HTTP handler for /exit */
 func Exit(w http.ResponseWriter, _ *http.Request) {
 	fmt.Fprintln(w, "Exited!")
-	fmt.Println("Exited via web")
 	time.Sleep(1 * time.Second)
 	os.Exit(0)
 }
@@ -313,4 +331,20 @@ func Count() {
 // String formats interface{}'s values to string
 func String(s ...interface{}) string {
 	return fmt.Sprintf("%v", s...)
+}
+
+// OutputWithJSON outputs json encoded data
+func OutputWithJSON(w http.ResponseWriter, data interface{}) {
+
+	output, err := json.MarshalIndent(Results, "", "    ")
+	if err != nil {
+		log.Println(err)
+		OutputWithJSON(w, err.Error())
+		return
+	}
+	w.Header().Set(
+		"Content-Type",
+		"application/json",
+	)
+	fmt.Fprintln(w, string(output))
 }
