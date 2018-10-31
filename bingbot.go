@@ -162,7 +162,7 @@ func Botify(searchStr string) {
 				[]byte(strings.Join(sey[len(pre):], "\n")),
 				0666)
 			if err != nil {
-				log.Fatal(err)
+				log.Println(err)
 			}
 			return
 		}
@@ -251,11 +251,6 @@ func domainHandler(w http.ResponseWriter, _ *http.Request) {
 	if JSON {
 		OutputWithJSON(w, s)
 	}
-	fmt.Fprintf(
-		w,
-		"Done![%s]",
-		filepath.Join(dir, "hosts.txt"),
-	)
 }
 
 // exitHandler exits the bot via web
@@ -330,7 +325,7 @@ func String(s ...interface{}) string {
 // OutputWithJSON outputs json encoded data
 func OutputWithJSON(w http.ResponseWriter, data interface{}) {
 
-	output, err := json.MarshalIndent(Results, "", "    ")
+	output, err := json.MarshalIndent(data, "", "    ")
 	if err != nil {
 		log.Println(err)
 		OutputWithJSON(w, err.Error())
